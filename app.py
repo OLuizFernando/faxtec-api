@@ -2,12 +2,14 @@ import os
 from datetime import datetime
 from dotenv import load_dotenv
 from flask import Flask, redirect, request, jsonify
+from flask_cors import CORS
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
 
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql://{os.getenv("PGUSER")}:{os.getenv("PGPASSWORD")}@{os.getenv("PGHOST")}/{os.getenv("PGDATABASE")}?sslmode=require"
